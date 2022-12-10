@@ -17,7 +17,8 @@ public class UpdateCartServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         HttpSession session = request.getSession();
-        String url = "/viewcart";
+        request.setCharacterEncoding("UTF-8");
+        String url = "/viewcart?ship=0";
         int idcart = Integer.parseInt(request.getParameter("idcart"));
         int currentAmount = Integer.parseInt(request.getParameter("currentAmount"));
         String caseAmount = request.getParameter("caseAmount");

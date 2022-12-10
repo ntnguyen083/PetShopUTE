@@ -17,7 +17,7 @@ public class OderDAO {
     public static List<OderBean> getOderProductByIdbill(int idbillmax,int iduser)
     {
         List<OderBean> listOder = new ArrayList<>();
-        String sql = "SELECT P.ID,P.NAME,C.AMOUNT,C.DISCOUNT,P.PRICE,P.PRICE*C.AMOUNT AS 'TOTALPRICE',B.ID AS IDBILL,C.ID as IDCART,P.ID AS IDPRODUCT ,U.IDUSER,P.URLIMAGE FROM PRODUCT AS P, CART AS C, BILL AS B, USER AS U WHERE\n" +
+        String sql = "SELECT P.ID,P.NAME,C.AMOUNT,C.DISCOUNT,P.PRICE,P.PRICE*C.AMOUNT AS 'TOTALPRICE',B.ID AS IDBILL,C.ID as IDCART,P.ID AS IDPRODUCT ,U.IDUSER,P.URLIMAGE FROM product AS P, cart AS C, bill AS B, user AS U WHERE\n" +
                 "C.IDBILL = ? AND U.IDUSER = ? AND B.STATUS = 0 AND B.ID = ? AND C.IDPRODUCT = P.ID";
         try{
             conn = ConnectDB.getConnection();
@@ -42,7 +42,7 @@ public class OderDAO {
                 oder.setIdUser(rs.getInt("IDUSER"));
                 listOder.add(oder);
             }
-
+            conn.close();
         }catch(Exception e){System.out.println(e);}
         return listOder;
     }

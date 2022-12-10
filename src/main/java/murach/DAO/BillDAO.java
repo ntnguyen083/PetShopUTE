@@ -16,7 +16,7 @@ public class BillDAO {
     public static int GetIDBillByIDUser(int iduser)
     {
         int result = 0;
-        String sql = "SELECT ID FROM BILL WHERE IDUSER = ?";
+        String sql = "SELECT ID FROM bill WHERE IDUSER = ?";
         try {
 
             // get a connection
@@ -28,7 +28,7 @@ public class BillDAO {
             {
                 result = rs.getInt("ID");
             }
-
+            conn.close();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -38,7 +38,7 @@ public class BillDAO {
     public static int GetIDBillByID(int id)
     {
         int result = -1;
-        String sql = "SELECT * FROM BILL WHERE ID = ?";
+        String sql = "SELECT * FROM bill WHERE ID = ?";
         try {
 
             // get a connection
@@ -50,7 +50,7 @@ public class BillDAO {
             {
                 result = rs.getInt("ID");
             }
-
+            conn.close();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -59,7 +59,7 @@ public class BillDAO {
 
     public static int InsertBill(int iduser) {
         int result = 0;
-        String sql = "INSERT INTO BILL(IDUSER,STATUS,TOTALPRICE) VALUES (?,0,0)";
+        String sql = "INSERT INTO bill (IDUSER,STATUS,TOTALPRICE) VALUES (?,0,0)";
         try {
 
             // get a connection
@@ -67,7 +67,7 @@ public class BillDAO {
             ps = conn.prepareStatement(sql);
             ps.setInt(1,iduser);
             result = ps.executeUpdate();
-
+            conn.close();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -75,7 +75,7 @@ public class BillDAO {
     }
     public static int GetMaxIDBillByIDUser(int iduser) {
         int result = -1;
-        String sql = "SELECT MAX(ID) FROM BILL WHERE STATUS = 0 AND IDUSER = ?";
+        String sql = "SELECT MAX(ID) FROM bill WHERE STATUS = 0 AND IDUSER = ?";
         try {
             // get a connection
             conn = ConnectDB.getConnection();
@@ -86,7 +86,7 @@ public class BillDAO {
             {
                 result = rs.getInt("MAX(ID)");
             }
-
+            conn.close();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -95,7 +95,7 @@ public class BillDAO {
     public static int UpdateBill(double totalPrice, int idbill)
     {
         int result = 0;
-        String sql = "UPDATE BILL SET TOTALPRICE = ?, STATUS = 1 WHERE ID = ?";
+        String sql = "UPDATE bill SET TOTALPRICE = ?, STATUS = 1 WHERE ID = ?";
         try {
             // get a connection
             conn = ConnectDB.getConnection();
@@ -103,10 +103,11 @@ public class BillDAO {
             ps.setDouble(1,totalPrice);
             ps.setInt(2,idbill);
             result = ps.executeUpdate();
-
+            conn.close();
         } catch (Exception e) {
             System.out.println(e);
         }
         return result;
     }
+
 }

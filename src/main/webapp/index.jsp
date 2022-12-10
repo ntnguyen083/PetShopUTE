@@ -12,8 +12,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Pet Shop</title>
+    <link rel="icon" type="image/png" href="./assets/images/pet-shop-center-icon_24877-3877.png"/>
     <link href="./assets/css/style-starter.css" rel="stylesheet" type="text/css">
-    <link rel="icon" type="image/png" href="./assets/images/icons/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.css">
 </head>
 <body>
@@ -58,10 +58,6 @@
                         <%}%>
                     </li>
                 </ul>
-                <form action="#error" method="GET" class="d-flex search-header">
-                    <input class="form-control" type="search" placeholder="Enter Keyword..." aria-label="Search" required="">
-                    <button class="btn btn-style" type="submit">Search</button>
-                </form>
             </div>
             <!-- toggle switch for light and dark theme -->
             <div class="cont-ser-position">
@@ -752,7 +748,12 @@
     var btnsignout = document.querySelector(".btn-signout");
     btnsignout.onclick = function ()
     {
-        window.location = "<%=request.getContextPath()%>/LogoutServlet";
+        let choice = confirm("Bạn có muốn đăng xuất?");
+        if (choice == true) {
+            window.location = "<%=request.getContextPath()%>/LogoutServlet";
+        } else {
+
+        }
     }
 </script>
 

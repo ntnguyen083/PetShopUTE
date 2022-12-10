@@ -23,6 +23,7 @@ public class ViewCartServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         UserBean user = (UserBean) session.getAttribute("user");
         String url = "/cart.jsp";

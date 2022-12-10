@@ -12,7 +12,8 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Product</title>
+    <title>Pet Shop</title>
+    <link rel="icon" type="image/png" href="./assets/images/pet-shop-center-icon_24877-3877.png"/>
     <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:400,700"
@@ -32,7 +33,7 @@
 <body id="reportsPage">
 <nav class="navbar navbar-expand-xl">
     <div class="container h-100">
-        <a class="navbar-brand" href="admin.jsp">
+        <a class="navbar-brand" href="<%=request.getContextPath()%>/report">
             <h1 class="tm-site-title mb-0">Product Admin</h1>
         </a>
         <button
@@ -50,57 +51,27 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto h-100">
                 <li class="nav-item">
-                    <a class="nav-link" href="admin.jsp">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/report">
                         <i class="fas fa-tachometer-alt"></i> Dashboard
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            id="navbarDropdown1"
-                            role="button"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false">
-                        <i class="far fa-file-alt"></i>
-                        <span> Reports <i class="fas fa-angle-down"></i> </span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Daily Report</a>
-                        <a class="dropdown-item" href="#">Weekly Report</a>
-                        <a class="dropdown-item" href="#">Yearly Report</a>
-                    </div>
-                </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="adminproduct.jsp">
+                    <a class="nav-link active" href="<%=request.getContextPath()%>/AdminProduct">
                         <i class="fas fa-shopping-cart"></i> Products
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="accounts_admin.jsp">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/ListAdminAccount">
                         <i class="far fa-user"></i> Accounts
                     </a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            id="navbarDropdown"
-                            role="button"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false">
-                        <i class="fas fa-cog"></i>
-                        <span> Settings <i class="fas fa-angle-down"></i> </span>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.jsp">
+                        <i class="far fa-file-alt"></i>
+                        User Website
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Profile</a>
-                        <a class="dropdown-item" href="#">Billing</a>
-                        <a class="dropdown-item" href="#">Customize</a>
-                    </div>
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -136,10 +107,13 @@
                                 <td>${product.getBrand()}</td>
                                 <td>$${product.getPrice()}</td>
                                 <td class="padlr-0">
-                                    <a href="<%=request.getContextPath()%>/" class="tm-product-delete-link">
+                                    <a href="<%=request.getContextPath()%>/storeddata?action=editproduct&idProduct=${product.getId()}&name=${product.getName()}&description=${product.getDescription()}&brand=${product.getBrand()}&price=${product.getPrice()}&idCategory=${product.getIdCategory()}&urlImage=${product.getUrlImage()}" class="tm-product-delete-link">
                                         <i class="far fa-wrench tm-product-delete-icon" style="font-weight: bold"></i>
                                     </a>
-                                    <a href="#" class="tm-product-delete-link">
+<%--                                    <a href="<%=request.getContextPath()%>/HandleProductAdmin?action=removeProduct&idproduct=${product.getId()}" class="tm-product-delete-link">--%>
+<%--                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>--%>
+<%--                                    </a>--%>
+                                    <a onclick="deleteproduct(${product.getId()})" class="tm-product-delete-link" style="cursor: pointer">
                                         <i class="far fa-trash-alt tm-product-delete-icon"></i>
                                     </a>
                                 </td>
@@ -156,16 +130,21 @@
             <div class="tm-bg-primary-dark tm-block tm-block-product-categories">
                 <h2 class="tm-block-title">Product Categories</h2>
                 <div class="tm-product-table-container-small">
-                    <table class="table tm-table-small tm-product-table">
+                    <table class="table table-hover tm-table-small tm-product-table">
                         <tbody>
                         <c:forEach items="${listCategory}" var="category">
                             <tr>
                                 <td class="tm-product-name">${category.getCategory()}</td>
                                 <td class="text-center padlr-0">
-                                    <a href="<%=request.getContextPath()%>/" class="tm-product-delete-link">
+                                    <a href="<%=request.getContextPath()%>/storeddata?action=editcategory&idcategory=${category.getIdCategory()}&category=${category.getCategory()}" class="tm-product-delete-link">
                                         <i class="far fa-wrench tm-product-delete-icon" style="font-weight: bold"></i>
                                     </a>
-                                    <a href="<%=request.getContextPath()%>/HandleProductAdmin?action=removeCategory&idcategory=${category.getIdCategory()}" class="tm-product-delete-link">
+<%--                                    <a href="<%=request.getContextPath()%>/HandleProductAdmin?action=removeCategory&idcategory=${category.getIdCategory()}"--%>
+<%--                                       class="tm-product-delete-link">--%>
+<%--                                        <i class="far fa-trash-alt tm-product-delete-icon"></i>--%>
+<%--                                    </a>--%>
+                                    <a onclick="deletecategory(${category.getIdCategory()})" style="cursor: pointer" ;
+                                       class="tm-product-delete-link">
                                         <i class="far fa-trash-alt tm-product-delete-icon"></i>
                                     </a>
                                 </td>
@@ -181,11 +160,10 @@
                 <div class="form-group mb-3 none">
                     <label for="newcategory">Category Name
                     </label>
-                    <form class="addcategory" action="<%=request.getContextPath()%>/HandleProductAdmin?action=addCategory" method="post">
-                        <input id="newcategory" name="newcategory" type="text" class="form-control validate" required="">
-<%--                        <a class="addcategory-link" href="<%=request.getContextPath()%>/HandleProductAdmin?action=addCategory">--%>
-<%--                            <i class="fa fa-plus-square addcategory-icon" aria-hidden="true"></i>--%>
-<%--                        </a>--%>
+                    <form class="addcategory"
+                          action="<%=request.getContextPath()%>/HandleProductAdmin?action=addCategory" method="post">
+                        <input id="newcategory" name="newcategory" type="text" class="form-control validate"
+                               required="">
                         <button class="addcategory-link" type="submit">
                             <i class="fa fa-plus-square addcategory-icon" aria-hidden="true"></i>
                         </button>
@@ -211,19 +189,35 @@
 <script src="admin/assets/js/bootstrap.min.js"></script>
 <!-- https://getbootstrap.com/ -->
 <script>
-    $(function () {
-        $(".tm-product-name").on("click", function () {
-            window.location.href = "edit-product.jsp";
-        });
-    });
-</script>
-<script>
     var btn = document.querySelector(".btnaddcategory");
-    btn.onclick = function ()
-    {
+    btn.onclick = function () {
         var form = document.querySelector(".addcategory");
         var parentform = form.parentElement;
-        parentform.classList.remove("none");
+        if (parentform.classList.contains("none")) {
+            parentform.classList.remove("none");
+        } else {
+            parentform.classList.add("none");
+        }
+    }
+</script>
+<script>
+    function deletecategory(id) {
+        let choice = confirm("Bạn có muốn xóa doanh mục này không?");
+        if (choice == true) {
+            window.location = "<%=request.getContextPath()%>/HandleProductAdmin?action=removeCategory&idcategory="+id;
+        } else {
+
+        }
+    }
+</script>
+<script>
+    function deleteproduct(id) {
+        let choice = confirm("Bạn có muốn xóa sản phẩm này không?");
+        if (choice == true) {
+            window.location = "<%=request.getContextPath()%>/HandleProductAdmin?action=removeProduct&idproduct="+id;
+        } else {
+
+        }
     }
 </script>
 </body>

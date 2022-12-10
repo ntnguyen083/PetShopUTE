@@ -27,10 +27,11 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
 
         String e=request.getParameter("email");
         String p=request.getParameter("password");
+        System.out.println(e);
+        System.out.println(p);
         LoginBean loginBean = new LoginBean();
         loginBean.setEmail(e);
         loginBean.setPassword(p);
@@ -49,6 +50,5 @@ public class LoginServlet extends HttpServlet {
             rd.include(request,response);
         }
 
-        out.close();
     }
 }

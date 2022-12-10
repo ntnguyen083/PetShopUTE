@@ -20,15 +20,15 @@ public class CheckoutServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String url = "/thanks.jsp";
         String address =  request.getParameter("address");
         String phonenumber = request.getParameter("phonenumber");
         int idBill = (int) session.getAttribute("idbillmax");
         double totalPrice = (double) session.getAttribute("totalbillPrice");
-        System.out.println(totalPrice);
         UserBean user = (UserBean) session.getAttribute("user");
-        System.out.println(phonenumber);
+        List<OderBean> listOder = (List<OderBean>) session.getAttribute("listOder");
         int result1 = BillDAO.UpdateBill(totalPrice,idBill);
         int result2 = UserDAO.UpdateUser(address,phonenumber,user.getIdUser());
         if(result1 > 0 && result2 > 0)
@@ -38,7 +38,7 @@ public class CheckoutServlet extends HttpServlet {
         else {
             url = "/error.jsp";
         }
-
+        sendMail.sendMail(user.getEmail(),listOder);
         getServletContext()
                 .getRequestDispatcher(url)
                 .forward(request, response);

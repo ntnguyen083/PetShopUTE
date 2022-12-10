@@ -13,7 +13,7 @@ public class RegisterDAO {
     private static ResultSet rs = null;
     public static int SignUp(RegisterBean registerBean){
         int result = 0;
-        String sql = "INSERT INTO USER(USERNAME,EMAIL,PASSWORD,TYPE) VALUES (?,?,?,0)";
+        String sql = "INSERT INTO user(USERNAME,EMAIL,PASSWORD,TYPE) VALUES (?,?,?,0)";
         try{
             String pass = registerBean.getPassword();
             String re_pass = registerBean.getRe_Password();
@@ -27,7 +27,7 @@ public class RegisterDAO {
                 ps.setString(3,registerBean.getPassword());
                 result = ps.executeUpdate();
             }
-
+            conn.close();
         }catch(Exception e){System.out.println(e);}
         return result;
     }

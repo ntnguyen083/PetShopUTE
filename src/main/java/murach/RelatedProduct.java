@@ -17,6 +17,7 @@ public class RelatedProduct extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
         String url = "/product.jsp";
         int idCategory = ProductDAO.getIDCategoryByID(Integer.parseInt(request.getParameter("idproduct")));
         List<ProductBean> listRelatedProduct = ProductDAO.getListProductByIDCategory(idCategory);

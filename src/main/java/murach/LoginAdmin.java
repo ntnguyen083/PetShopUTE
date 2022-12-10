@@ -34,7 +34,7 @@ public class LoginAdmin extends HttpServlet {
             UserBean admin = userDao.getUsername(loginBean);
             HttpSession session = request.getSession();
             session.setAttribute("admin",admin);
-            RequestDispatcher rd=request.getRequestDispatcher("admin.jsp");
+            RequestDispatcher rd=request.getRequestDispatcher("/report");
             rd.forward(request,response);
         }
         else{

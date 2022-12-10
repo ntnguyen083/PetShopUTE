@@ -13,6 +13,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pet Shop</title>
+  <link rel="icon" type="image/png" href="./assets/images/pet-shop-center-icon_24877-3877.png"/>
   <!-- google font -->
   <link
           href="//fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
@@ -64,10 +65,6 @@
             <%}%>
           </li>
         </ul>
-        <form action="#error" method="GET" class="d-flex search-header">
-          <input class="form-control" type="search" placeholder="Enter Keyword..." aria-label="Search" required="">
-          <button class="btn btn-style" type="submit">Search</button>
-        </form>
       </div>
       <!-- toggle switch for light and dark theme -->
       <div class="cont-ser-position">
@@ -163,7 +160,7 @@
         <div class="area-box">
           <i class="fas fa-dog color-2"></i>
           <h4><a href="about.jsp" class="title-head">Huấn luyện</a></h4>
-          <p class="">Với nhiều năm kinh nghiệm trong nghề, chúng tôi sẽ đào tạo cho thú cưng của bạn các kĩ năng đỉnh cao.</p>
+          <p class="">Với kinh nghiệm lâu năm, chúng tôi sẽ đào tạo cho thú cưng của bạn.</p>
         </div>
       </div>
     </div>
@@ -492,7 +489,12 @@
   var btnsignout = document.querySelector(".btn-signout");
   btnsignout.onclick = function ()
   {
-    window.location = "./login.jsp";
+    let choice = confirm("Bạn có muốn đăng xuất?");
+    if (choice == true) {
+      window.location = "<%=request.getContextPath()%>/LogoutServlet";
+    } else {
+
+    }
   }
 </script>
 </body>

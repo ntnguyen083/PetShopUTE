@@ -17,6 +17,7 @@ public class ProductByCategoryServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
         String url = "/shop.jsp";
         int idCategory = Integer.parseInt(request.getParameter("idCategory"));
         List<ProductBean> listProductByID = ProductDAO.getListProductByIDCategory(idCategory);

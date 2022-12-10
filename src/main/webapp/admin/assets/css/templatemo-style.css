@@ -746,3 +746,16 @@ input[type="checkbox"]:focus {
   padding-left: 0px;
   padding-right: 0px;
 }
+
+.my-4 {
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.footerlogin
+{
+  position: fixed;
+  left: 0px;
+  right: 0;
+  bottom: 0;
+}

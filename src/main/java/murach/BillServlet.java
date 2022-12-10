@@ -16,6 +16,7 @@ public class BillServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         UserBean user = (UserBean) session.getAttribute("user");
         String url = "/cart";
@@ -35,7 +36,16 @@ public class BillServlet extends HttpServlet {
             } else {
                 session.setAttribute("idbillmax", idbillmax);
             }
-
+            String action = request.getParameter("action");
+            int amount = 0;
+            if(action.equals("default"))
+            {
+                amount = 1;
+            }
+            else {
+                amount = Integer.parseInt(request.getParameter("amount"));
+            }
+            session.setAttribute("amount",amount);
         }
         getServletContext()
                 .getRequestDispatcher(url)

@@ -17,6 +17,7 @@ public class ProductServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
         String url = "/shop.jsp";
 
         List<ProductBean> listProduct = ProductDAO.getListProduct();

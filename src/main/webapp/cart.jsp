@@ -14,6 +14,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pet Shop</title>
+    <link rel="icon" type="image/png" href="./assets/images/pet-shop-center-icon_24877-3877.png"/>
     <!-- google font -->
     <link
             href="//fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
@@ -51,7 +52,7 @@
                                             Quality
                                         </div>
                                         <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1" style="text-align: center">
-                                           Total Price
+                                            Total Price
                                         </div>
                                         <div class="col-md-1 col-lg-1 col-xl-1 text-end" style="text-align: center">
 
@@ -64,7 +65,7 @@
                                             <div class="col-md-2 col-lg-2 col-xl-2">
                                                 <a href="<%=request.getContextPath()%>/ViewProduct?idproduct=${oder.getIdProduct()}">
                                                     <img
-                                                            src="${oder.getUrlImage()}"
+                                                            src="./assets/images/${oder.getUrlImage()}"
                                                             class="img-fluid rounded-3" alt="Cotton T-shirt">
                                                 </a>
                                             </div>
@@ -73,17 +74,19 @@
                                                 <h6 class="text-black mb-0">${oder.getNameProduct()}</h6>
                                             </div>
                                             <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                <a class="btn btn-link px-2" href="<%=request.getContextPath()%>/updatecart?idcart=${oder.getIdCart()}&currentAmount=${oder.getAmount()}&caseAmount=down">
-<%--                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">--%>
+                                                <a class="btn btn-link px-2"
+                                                   href="<%=request.getContextPath()%>/updatecart?idcart=${oder.getIdCart()}&currentAmount=${oder.getAmount()}&caseAmount=down">
+                                                        <%--                                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">--%>
                                                     <i class="fas fa-minus"></i>
                                                 </a>
 
-<%--                                                <input id="form" min="0" name="quantity" value="${oder.getAmount()}" type="number"--%>
-<%--                                                       class="form-control form-control-sm" />--%>
+                                                    <%--                                                <input id="form" min="0" name="quantity" value="${oder.getAmount()}" type="number"--%>
+                                                    <%--                                                       class="form-control form-control-sm" />--%>
                                                 <a class="form-control form-control-sm amount-cart">${oder.getAmount()}</a>
 
-                                                <a class="btn btn-link px-2" href="<%=request.getContextPath()%>/updatecart?idcart=${oder.getIdCart()}&currentAmount=${oder.getAmount()}&caseAmount=up">
-<%--                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">--%>
+                                                <a class="btn btn-link px-2"
+                                                   href="<%=request.getContextPath()%>/updatecart?idcart=${oder.getIdCart()}&currentAmount=${oder.getAmount()}&caseAmount=up">
+                                                        <%--                                                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">--%>
                                                     <i class="fas fa-plus"></i>
                                                 </a>
                                             </div>
@@ -91,7 +94,13 @@
                                                 <h6 class="mb-0">$ ${oder.getTotalPrice()}</h6>
                                             </div>
                                             <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                                <a href="<%=request.getContextPath()%>/deletecart?idcart=${oder.getIdCart()}" class="text-muted"><i class="fas fa-times"></i></a>
+                                                    <%--                                                <a href="<%=request.getContextPath()%>/deletecart?idcart=${oder.getIdCart()}" class="text-muted cartdeletebtn">--%>
+                                                    <%--                                                    <i class="fas fa-times"></i>--%>
+                                                    <%--                                                </a>--%>
+                                                <a onclick="deletecart(${oder.getIdCart()})"
+                                                   class="text-muted cartdeletebtn">
+                                                    <i class="fas fa-times"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     </c:forEach>
@@ -112,9 +121,11 @@
                                         <h5 class="text-uppercase mb-3">Shipping</h5>
 
                                         <div class="mb-4 pb-2">
-                                            <select multiple class="select" name="ship" onchange="validateSelectBox(this)">
+                                            <select multiple class="select" name="ship"
+                                                    onchange="validateSelectBox(this)">
                                                 <c:forEach items="${listShip}" var="ship" varStatus="loop">
-                                                    <option value="${loop.index}">${ship.getType()}- $${ship.getPrice()}</option>
+                                                    <option value="${loop.index}">${ship.getType()}-
+                                                        $${ship.getPrice()}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
@@ -122,7 +133,8 @@
                                         <h5 class="text-uppercase mb-3">Address</h5>
                                         <div class="mb-4">
                                             <div class="form-outline">
-                                                <input type="text" id="address" name="address" class="form-control form-control-lg" />
+                                                <input type="text" id="address" name="address"
+                                                       class="form-control form-control-lg"/>
                                                 <label class="form-label" for="address">Enter your address</label>
                                             </div>
                                         </div>
@@ -130,8 +142,10 @@
                                         <h5 class="text-uppercase mb-3">Phone Number</h5>
                                         <div class="mb-4">
                                             <div class="form-outline">
-                                                <input type="text" id="phonenumber" name="phonenumber" class="form-control form-control-lg" />
-                                                <label class="form-label" for="phonenumber">Enter your phone number</label>
+                                                <input type="text" id="phonenumber" name="phonenumber"
+                                                       class="form-control form-control-lg"/>
+                                                <label class="form-label" for="phonenumber">Enter your phone
+                                                    number</label>
                                             </div>
                                         </div>
 
@@ -143,7 +157,8 @@
                                         </div>
 
                                         <button type="submit" class="btn btn-dark btn-block btn-lg"
-                                           data-mdb-ripple-color="dark">Register</button>
+                                                data-mdb-ripple-color="dark">Register
+                                        </button>
 
                                     </form>
                                 </div>
@@ -157,16 +172,25 @@
 </section>
 </body>
 <script language="javascript">
-    function validateSelectBox(obj)
-    {
+    function validateSelectBox(obj) {
         // Lấy danh sách các options
         var options = obj.children;
 
         // lặp qua từng option và kiểm tra thuộc tính selected
-        for (var i = 0; i < options.length; i++){
-            if (options[i].selected){
-                window.location="./viewcart?ship="+i;
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].selected) {
+                window.location = "./viewcart?ship=" + i;
             }
+        }
+    }
+</script>
+<script>
+    function deletecart(id) {
+        let choice = confirm("Bạn có muốn xóa sản phẩm?");
+        if (choice == true) {
+            window.location = "<%=request.getContextPath()%>/deletecart?idcart=" + id;
+        } else {
+
         }
     }
 </script>

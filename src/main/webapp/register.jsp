@@ -11,7 +11,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign Up</title>
+    <title>Pet Shop</title>
+    <link rel="icon" type="image/png" href="./assets/images/pet-shop-center-icon_24877-3877.png"/>
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="./assets/fonts/material-icon/css/material-design-iconic-font.min.css">

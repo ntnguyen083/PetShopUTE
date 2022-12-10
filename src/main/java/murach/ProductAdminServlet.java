@@ -20,6 +20,7 @@ public class ProductAdminServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
         getCategory(request,response);
         getProduct(request,response);
         getServletContext()

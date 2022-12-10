@@ -17,7 +17,7 @@ public class ShipDAO {
     public static List<ShipBean> getListShip()
     {
         List<ShipBean> listShip = new ArrayList<>();
-        String sql = "select * from petshop.ship";
+        String sql = "select * from ship";
         try{
             conn = ConnectDB.getConnection();
             ps = conn.prepareStatement(sql);
@@ -30,13 +30,14 @@ public class ShipDAO {
                 ship.setPrice(rs.getDouble("PRICE"));
                 listShip.add(ship);
             }
+            conn.close();
         }catch(Exception e){System.out.println(e);}
         return listShip;
     }
     public static ShipBean getShipByID(int id)
     {
         ShipBean ship = new ShipBean();
-        String sql = "select * from petshop.ship where id = ?";
+        String sql = "select * from ship where id = ?";
         try{
             conn = ConnectDB.getConnection();
             ps = conn.prepareStatement(sql);
@@ -49,6 +50,7 @@ public class ShipDAO {
                 ship.setType(rs.getString("TYPE"));
                 ship.setPrice(rs.getDouble("PRICE"));
             }
+            conn.close();
         }catch(Exception e){System.out.println(e);}
         return ship;
     }

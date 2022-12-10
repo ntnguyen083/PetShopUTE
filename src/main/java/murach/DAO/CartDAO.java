@@ -16,7 +16,7 @@ public class CartDAO {
     public static List<CartBean> getListCart()
     {
         List<CartBean> listCart = new ArrayList<>();
-        String sql = "select * from petshop.cart";
+        String sql = "select * from cart";
         try{
             conn = ConnectDB.getConnection();
             ps = conn.prepareStatement(sql);
@@ -32,21 +32,23 @@ public class CartDAO {
                 cart.setPrice(rs.getDouble("PRICE"));
                 listCart.add(cart);
             }
+            conn.close();
         }catch(Exception e){System.out.println(e);}
         return listCart;
     }
-    public static int InsertCart(int idproduct, int idbill) {
+    public static int InsertCart(int idproduct, int idbill, int amount) {
         int result = 0;
-        String sql = "INSERT INTO CART(IDPRODUCT,AMOUNT,IDBILL,DISCOUNT,PRICE) VALUES (?,1,?,0,0)";
+        String sql = "INSERT INTO cart(IDPRODUCT,AMOUNT,IDBILL,DISCOUNT,PRICE) VALUES (?,?,?,0,0)";
         try {
 
             // get a connection
             conn = ConnectDB.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1,idproduct);
-            ps.setInt(2,idbill);
+            ps.setInt(2,amount);
+            ps.setInt(3,idbill);
             result = ps.executeUpdate();
-
+            conn.close();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -55,7 +57,7 @@ public class CartDAO {
 
     public static int UpdateCart(int id, int amount) {
         int result = 0;
-        String sql = "UPDATE CART SET AMOUNT=? WHERE ID=?";
+        String sql = "UPDATE cart SET AMOUNT=? WHERE ID=?";
         try {
 
             // get a connection
@@ -64,7 +66,7 @@ public class CartDAO {
             ps.setInt(1,amount);
             ps.setInt(2,id);
             result = ps.executeUpdate();
-
+            conn.close();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -73,7 +75,7 @@ public class CartDAO {
 
     public static int DeleteCart(int id) {
         int result = 0;
-        String sql = "DELETE FROM CART WHERE ID=?";
+        String sql = "DELETE FROM cart WHERE ID=?";
         try {
 
             // get a connection
@@ -81,7 +83,7 @@ public class CartDAO {
             ps = conn.prepareStatement(sql);
             ps.setInt(1,id);
             result = ps.executeUpdate();
-
+            conn.close();
         } catch (Exception e) {
             System.out.println(e);
         }

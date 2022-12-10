@@ -17,12 +17,14 @@ public class CategoryServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
         String url = "/product";
         List<CategoryBean> listCategory;
         listCategory= CategoryDAO.getListCategory();
         if(listCategory != null){
             HttpSession session = request.getSession();
             session.removeAttribute("listProductByID");
+            session.removeAttribute("listProductSearch");
             session.setAttribute("listCategory",listCategory);
         } else {
             url = "/error.jsp";

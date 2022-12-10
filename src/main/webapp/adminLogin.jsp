@@ -11,7 +11,8 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Login</title>
+    <title>Pet Shop</title>
+    <link rel="icon" type="image/png" href="./assets/images/pet-shop-center-icon_24877-3877.png"/>
     <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:400,700"
@@ -30,13 +31,13 @@
 
 <body>
 
-<div class="container tm-mt-big tm-mb-big">
+<div class="container tm-mt-big tm-mb-big" style="margin-top: 115px">
     <div class="row">
         <div class="col-12 mx-auto tm-login-col">
             <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h2 class="tm-block-title mb-4">Welcome to Dashboard, Login</h2>
+                        <h2 class="tm-block-title mb-4">Welcome to Admin Form</h2>
                     </div>
                 </div>
                 <div class="row mt-2">
@@ -73,9 +74,6 @@
                                     Login
                                 </button>
                             </div>
-                            <button class="mt-5 btn btn-primary btn-block text-uppercase">
-                                Forgot your password?
-                            </button>
                         </form>
                     </div>
                 </div>
@@ -83,7 +81,7 @@
         </div>
     </div>
 </div>
-<footer class="tm-footer row tm-mt-small">
+<footer class="tm-footer row tm-mt-small footerlogin">
     <div class="col-12 font-weight-light">
         <p class="text-center text-white mb-0 px-4 small">
             Copyright &copy; <b>2022</b> All rights reserved.

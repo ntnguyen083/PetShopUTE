@@ -17,6 +17,7 @@ public class ViewProductServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
         int idproduct = Integer.parseInt(request.getParameter("idproduct"));
         ProductBean product = ProductDAO.getProductByID(idproduct);
 //        request.setAttribute("idCategory",product.getId());

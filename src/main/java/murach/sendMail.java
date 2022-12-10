@@ -1,12 +1,17 @@
 package murach;
 
+import bean.OderBean;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Properties;
 
 public class sendMail {
-    public static void sendMail(String recieverMail) {
+    public static void sendMail(String recieverMail, List<OderBean> listOder) {
 
         // Recipient's email ID needs to be mentioned.
         String to = recieverMail;
@@ -56,7 +61,13 @@ public class sendMail {
             message.setSubject("[Pet Shop] Hóa đơn mua hàng tại Pet Shop");
 
             // Now set the actual message
-            message.setText("Vietnam opening!");
+            message.setText("Hóa đơn của mua hàng của quý khách tại cửa hàng Pet Shop:");
+            message.setText("Số lượng x Tên sản phẩm");
+            message.setText("_____________________________________________________________");
+            for (OderBean oder: listOder) {
+                message.setText(oder.getAmount() + " | " + oder.getNameProduct() );
+            }
+            message.setText("Cảm ơn quý khách đã ủng hộ cửa hàng của chúng ta. Hẹn gặp lại");
 
             // Send message
             Transport.send(message);
@@ -66,8 +77,4 @@ public class sendMail {
 
     }
 
-    public static void main(String []args)
-    {
-        sendMail("20110388@student.hcmute.edu.vn");
-    }
 }

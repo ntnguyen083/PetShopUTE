@@ -21,10 +21,12 @@ public class CartServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
         String url = "/viewcart?ship=0";
         boolean same = false;
         int idproduct = Integer.parseInt(request.getParameter("idProduct"));
         HttpSession session = request.getSession();
+        int amount = (int) session.getAttribute("amount");
         int idBill = (int) session.getAttribute("idbillmax");
         UserBean user = (UserBean) session.getAttribute("user");
         List<OderBean> listOder = OderDAO.getOderProductByIdbill(idBill, user.getIdUser());
@@ -39,14 +41,14 @@ public class CartServlet extends HttpServlet {
         }
         if(same)
         {
-            int result = CartDAO.UpdateCart(sameOder.getIdCart(),sameOder.getAmount() + 1);
+            int result = CartDAO.UpdateCart(sameOder.getIdCart(),sameOder.getAmount() + amount);
             if (result > 0) {
             } else {
                 url = "/error.jsp";
             }
         }
         else {
-            int result = CartDAO.InsertCart(idproduct, idBill);
+            int result = CartDAO.InsertCart(idproduct, idBill, amount);
             if (result > 0) {
             } else {
                 url = "/error.jsp";

@@ -19,8 +19,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Pet Shop</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" type="image/png" href="./assets/images/pet-shop-center-icon_24877-3877.png"/>
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -69,10 +68,6 @@
                         <%}%>
                     </li>
                 </ul>
-                <form action="#error" method="GET" class="d-flex search-header">
-                    <input class="form-control" type="search" placeholder="Enter Keyword..." aria-label="Search" required="">
-                    <button class="btn btn-style" type="submit">Search</button>
-                </form>
             </div>
             <!-- toggle switch for light and dark theme -->
             <div class="cont-ser-position">
@@ -118,40 +113,19 @@
                 Cart
             </a>
         </div>
+        <form action="<%=request.getContextPath()%>/SearchProduct" method="post" class="d-flex search-header">
+            <input class="form-control" name="search" type="search" placeholder="Enter Keyword..." aria-label="Search" required="">
+            <button class="btn btn-style" type="submit">Search</button>
+        </form>
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <c:choose>
-                <c:when test="${listProductByID == null}">
-                    <c:forEach items="${listProduct}" var="product">
-                        <div class="col mb-5">
-                            <div class="card h-100 product-form">
-                                <a href="<%=request.getContextPath()%>/ViewProduct?idproduct=${product.id}" class="profile-product">
-                                    <!-- Product image-->
-                                    <img class="card-img-top" src="${product.urlImage}" alt="...">
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center product-text">
-                                            <!-- Product name-->
-                                            <h5 class="fw-bolder">${product.name}</h5>
-                                            <!-- Product price-->
-                                            <span>$${product.price}</span>
-                                        </div>
-                                    </div>
-                                    <!-- Product actions-->
-                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="<%=request.getContextPath()%>/bill?idProduct=${product.id}">Add to cart</a></div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </c:forEach>
-                </c:when>
-                <c:otherwise>
+                <c:when test="${listProductByID != null}">
                     <c:forEach items="${listProductByID}" var="product">
                         <div class="col mb-5">
                             <div class="card h-100 product-form">
                                 <a href="product.jsp" class="profile-product">
                                     <!-- Product image-->
-                                    <img class="card-img-top" src="${product.urlImage}" alt="...">
+                                    <img class="card-img-top" src="./assets/images/${product.urlImage}" alt="...">
                                     <!-- Product details-->
                                     <div class="card-body p-4">
                                         <div class="text-center product-text">
@@ -169,6 +143,60 @@
                             </div>
                         </div>
                     </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <c:choose>
+                        <c:when test="${listProductSearch != null}">
+                            <c:forEach items="${listProductSearch}" var="search">
+                                <div class="col mb-5">
+                                    <div class="card h-100 product-form">
+                                        <a href="<%=request.getContextPath()%>/ViewProduct?idproduct=${search.id}" class="profile-product">
+                                            <!-- Product image-->
+                                            <img class="card-img-top" src="./assets/images/${search.urlImage}" alt="...">
+                                            <!-- Product details-->
+                                            <div class="card-body p-4">
+                                                <div class="text-center product-text">
+                                                    <!-- Product name-->
+                                                    <h5 class="fw-bolder">${search.name}</h5>
+                                                    <!-- Product price-->
+                                                    <span>$${search.price}</span>
+                                                </div>
+                                            </div>
+                                            <!-- Product actions-->
+                                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="<%=request.getContextPath()%>/bill?idProduct=${product.id}">Add to cart</a></div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach items="${listProduct}" var="product">
+                                <div class="col mb-5">
+                                    <div class="card h-100 product-form">
+                                        <a href="<%=request.getContextPath()%>/ViewProduct?idproduct=${product.id}" class="profile-product">
+                                            <!-- Product image-->
+                                            <img class="card-img-top" src="./assets/images/${product.urlImage}" alt="...">
+                                            <!-- Product details-->
+                                            <div class="card-body p-4">
+                                                <div class="text-center product-text">
+                                                    <!-- Product name-->
+                                                    <h5 class="fw-bolder">${product.name}</h5>
+                                                    <!-- Product price-->
+                                                    <span>$${product.price}</span>
+                                                </div>
+                                            </div>
+                                            <!-- Product actions-->
+                                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="<%=request.getContextPath()%>/bill?idProduct=${product.id}&action=default">Add to cart</a></div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
                 </c:otherwise>
             </c:choose>
         </div>
@@ -234,7 +262,12 @@
     var btnsignout = document.querySelector(".btn-signout");
     btnsignout.onclick = function ()
     {
-        window.location = "./login.jsp";
+        let choice = confirm("Bạn có muốn đăng xuất?");
+        if (choice == true) {
+            window.location = "<%=request.getContextPath()%>/LogoutServlet";
+        } else {
+
+        }
     }
 </script>
 </body>
