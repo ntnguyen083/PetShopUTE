@@ -2,7 +2,7 @@ package murach.DAO;
 
 import bean.LoginBean;
 import bean.UserBean;
-import murach.ConnectDB;
+import murach.cotroller.ConnectDB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

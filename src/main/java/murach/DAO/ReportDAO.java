@@ -1,7 +1,7 @@
 package murach.DAO;
 
 import bean.ReportBean;
-import murach.ConnectDB;
+import murach.cotroller.ConnectDB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

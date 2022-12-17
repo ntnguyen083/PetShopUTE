@@ -1,8 +1,6 @@
 package murach.DAO;
 
-import bean.BillBean;
-import bean.ProductBean;
-import murach.ConnectDB;
+import murach.cotroller.ConnectDB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
